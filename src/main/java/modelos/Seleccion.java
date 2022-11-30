@@ -11,10 +11,6 @@ public class Seleccion {
 	private String rutaBandera;
 	private ArrayList<Jugador> jugadores;
 
-	public Seleccion(){
-		this.jugadores = new ArrayList<>();
-	}
-
 	public Seleccion(String nombre, String rankingFIFA, String rutaBandera) {
 		this.nombre = nombre;
 		this.rankingFIFA = rankingFIFA;
@@ -45,6 +41,7 @@ public class Seleccion {
 	public void setJugadores(ArrayList<Jugador> jugadores) {
 		this.jugadores = jugadores;
 	}
+
 	public Jugador buscarJugadorPorNombre(String nombre) {
 		for (Jugador jugador: jugadores) {
 			if(jugador.getNombre().equals(nombre)) {

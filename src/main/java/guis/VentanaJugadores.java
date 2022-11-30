@@ -75,10 +75,23 @@ public class VentanaJugadores extends Ventana implements ActionListener {
     }
 
     private void editarJugador(){
+        String campoNombre = nombre.getText();
+        String campoPosicion = posicion.getText();
+        if(camposVacios() || !poscionFormatoCorrecto(campoPosicion)){
+            return;
+        }
         Jugador jugador1 = seleccion.buscarJugadorPorNombre(nombresJugadores.getSelectedItem().toString());
-        Jugador jugador2 = new Jugador(jugador1.getNumero(), nombre.getText(), posicion.getText(), jugador1.getRutaBandera());
+        Jugador jugador2 = new Jugador(jugador1.getNumero(), campoNombre, campoPosicion, jugador1.getRutaBandera());
         seleccion.reemplazarJugador(jugador1, jugador2);
         JugadoresDao.registrarDatos(seleccion.getJugadores(), seleccion.getRutaEquipo());
+    }
+
+    public boolean camposVacios() {
+        return nombre.getText().equals("") || posicion.getText().equals("");
+    }
+
+    public boolean poscionFormatoCorrecto(String posicion){
+        return posicion.equals("GK") || posicion.equals("MF") || posicion.equals("FW") || posicion.equals("DF");
     }
 
     @Override
