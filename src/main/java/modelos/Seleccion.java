@@ -1,7 +1,6 @@
 package modelos;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import javax.swing.*;
 
@@ -60,5 +59,15 @@ public class Seleccion {
 			}
 		}
 		jugadores = nuevosJugadores;
+	}
+
+	public boolean hayTresGK(){
+		int cont = 0;
+		for (Jugador jugador: jugadores) {
+			if(jugador.getPosicion().equals("GK")){
+				cont++;
+			}
+		}
+		return cont==3;
 	}
 }

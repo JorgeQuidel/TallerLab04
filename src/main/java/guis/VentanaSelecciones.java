@@ -21,6 +21,7 @@ public class VentanaSelecciones extends Ventana implements ActionListener {
         crearEtiquetas();
         crearBotones();
         crearComboBox();
+        mostrarDatosSeleccion();
         this.setVisible(true);
     }
 
