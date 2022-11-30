@@ -1,13 +1,11 @@
 package guis;
 
 import datos.SeleccionesDao;
-import modelos.Jugador;
 import modelos.Seleccion;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
 import java.util.List;
 
 public class VentanaSelecciones extends Ventana implements ActionListener {

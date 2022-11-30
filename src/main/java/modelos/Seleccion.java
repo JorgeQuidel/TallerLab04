@@ -1,6 +1,7 @@
 package modelos;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.*;
 
@@ -45,12 +46,22 @@ public class Seleccion {
 		this.jugadores = jugadores;
 	}
 	public Jugador buscarJugadorPorNombre(String nombre) {
-		nombre = "hola";
 		for (Jugador jugador: jugadores) {
 			if(jugador.getNombre().equals(nombre)) {
 				return jugador;
 			}
 		}
 		throw new RuntimeException();
+	}
+	public void reemplazarJugador(Jugador jugador1, Jugador jugador2){
+		ArrayList<Jugador> nuevosJugadores = new ArrayList<>();
+		for (Jugador jugador: jugadores) {
+			if(jugador == jugador1){
+				nuevosJugadores.add(jugador2);
+			}else{
+				nuevosJugadores.add(jugador);
+			}
+		}
+		jugadores = nuevosJugadores;
 	}
 }

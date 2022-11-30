@@ -5,6 +5,7 @@ import modelos.Pais;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.List;
 
 public class JugadoresDao {
 
@@ -27,7 +28,7 @@ public class JugadoresDao {
         return jugadores;
     }
 
-    public static boolean registrarDatos(Object objeto, String direccionArchivo) {
+    public static boolean registrarDatos(List<Jugador> jugadores, String direccionArchivo) {
         boolean lineaVacia=false;
         try {
             File file = new File(direccionArchivo);
@@ -35,13 +36,12 @@ public class JugadoresDao {
                 file.createNewFile();
                 lineaVacia=true;
             }
-            FileWriter fw = new FileWriter(file,true);
+            FileWriter fw = new FileWriter(file);
             BufferedWriter bw = new BufferedWriter(fw);
-
-            if(!lineaVacia){
-                bw.newLine();
+            for (Jugador jugador: jugadores) {
+                String linea = jugador.getNumero() + ";" +  jugador.getNombre() +  ";" + jugador.getPosicion() + "\n";
+                bw.write(linea);
             }
-            bw.write(objeto.toString());
             bw.close();
             return true;
         } catch (Exception e) {

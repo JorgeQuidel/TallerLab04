@@ -13,6 +13,7 @@ public class VentanaJugadores extends Ventana implements ActionListener {
     private String rutaJugadores;
     private JButton volver;
     private JButton verInfo;
+    private JButton guardarCambios;
     private JComboBox nombresJugadores;
     private JTextField nombre;
     private JTextField posicion;
@@ -50,6 +51,8 @@ public class VentanaJugadores extends Ventana implements ActionListener {
         verInfo.addActionListener(this);
         volver = this.generarBoton("Volver", 200, 300, 150, 30);
         volver.addActionListener(this);
+        guardarCambios = this.generarBoton("Guardar Cambios", 380, 300, 150, 30);
+        guardarCambios.addActionListener(this);
     }
 
     private void crearEtiquetas() {
@@ -60,7 +63,7 @@ public class VentanaJugadores extends Ventana implements ActionListener {
         nombre = this.generarCampoDeTexto(100, 100, 300, 20);
         posicion = this.generarCampoDeTexto(100, 150, 300, 20);
         numero = this.generarEtiqueta("", 100, 200, 300, 20);
-        pais = this.generarEtiqueta("", 100, 250, 300, 50);
+        pais = this.generarEtiqueta("", 100, 250, 300, 20);
     }
 
     public void mostrarDatosEstudiante() {
@@ -68,7 +71,14 @@ public class VentanaJugadores extends Ventana implements ActionListener {
         nombre.setText(jugador.getNombre());
         numero.setText(jugador.getNumero());
         posicion.setText(jugador.getPosicion());
-        pais.setIcon(jugador.obtenerIcono());
+        pais.setText(seleccion.getNombre());
+    }
+
+    private void editarJugador(){
+        Jugador jugador1 = seleccion.buscarJugadorPorNombre(nombresJugadores.getSelectedItem().toString());
+        Jugador jugador2 = new Jugador(jugador1.getNumero(), nombre.getText(), posicion.getText(), jugador1.getRutaBandera());
+        seleccion.reemplazarJugador(jugador1, jugador2);
+        JugadoresDao.registrarDatos(seleccion.getJugadores(), seleccion.getRutaEquipo());
     }
 
     @Override
@@ -84,6 +94,11 @@ public class VentanaJugadores extends Ventana implements ActionListener {
             } catch (Exception ex) {
                 ex.printStackTrace();
             }
+        }
+
+        if (e.getSource() == guardarCambios) {
+            editarJugador();
+            rellenarComboBox();
         }
     }
 }

@@ -19,24 +19,16 @@ public class Jugador {
 		return nombre;
 	}
 
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
+	public String getRutaBandera() {
+		return rutaBandera;
 	}
 
 	public String getNumero() {
 		return numero;
 	}
 
-	public void setNumero(String numero) {
-		this.numero = numero;
-	}
-
 	public String getPosicion() {
 		return posicion;
-	}
-
-	public void setPosicion(String posicion) {
-		this.posicion = posicion;
 	}
 
 	public ImageIcon obtenerIcono(){
