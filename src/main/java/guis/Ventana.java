@@ -63,6 +63,18 @@ public abstract class Ventana extends JFrame {
         return etiqueta;
     }
 
+    protected JComboBox generarComboBoxJugadores(List <Jugador> jugadores, int x, int y, int ancho, int largo) {
+        JComboBox <String> comboBox = new JComboBox<String>();
+        this.add(comboBox);
+        comboBox.setBounds(x,y,ancho,largo);
+
+        for (Jugador jugador: jugadores) {
+            comboBox.addItem(jugador.getNombre());
+        }
+
+        return comboBox;
+    }
+
     protected JComboBox generarComboBoxSeleccion(List <Seleccion> selecciones, int x, int y, int ancho, int largo) {
         JComboBox <String> comboBox = new JComboBox<String>();
         this.add(comboBox);

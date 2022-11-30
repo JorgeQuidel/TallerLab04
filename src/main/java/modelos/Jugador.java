@@ -39,4 +39,8 @@ public class Jugador {
 		this.posicion = posicion;
 	}
 
+	public ImageIcon obtenerIcono(){
+		String ruta = "src/img/" + rutaBandera;
+		return new ImageIcon(String.valueOf(new ImageIcon(ruta)));
+	}
 }

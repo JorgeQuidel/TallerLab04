@@ -1,7 +1,6 @@
 package guis;
 
 import datos.SeleccionesDao;
-import excepciones.AccesoADatosInterrumpidoException;
 import modelos.Jugador;
 import modelos.Seleccion;
 
@@ -47,13 +46,17 @@ public class VentanaSelecciones extends Ventana implements ActionListener {
     }
 
     public void mostrarDatosSeleccion() {
-        Seleccion seleccion = obtenerSelecciones().get(nombresSelecciones.getSelectedIndex());
+        Seleccion seleccion = obtenerSeleccionActual();
         seleccionRanking.setText(seleccion.getRankingFIFA());
         iconoSeleccion.setIcon(seleccion.obtenerIcono());
     }
 
     public List<Seleccion> obtenerSelecciones(){
         return SeleccionesDao.leerArchivoSelecciones("src/selecciones/teams.txt");
+    }
+
+    public Seleccion obtenerSeleccionActual(){
+        return obtenerSelecciones().get(nombresSelecciones.getSelectedIndex());
     }
 
     @Override
@@ -65,6 +68,12 @@ public class VentanaSelecciones extends Ventana implements ActionListener {
                 ex.printStackTrace();
             }
         }
+
+        if (e.getSource() == verJugadores){
+            new VentanaJugadores(obtenerSeleccionActual());
+            this.dispose();
+        }
+
         if (e.getSource() == salir){
             this.dispose();
         }

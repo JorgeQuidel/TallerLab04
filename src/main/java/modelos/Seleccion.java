@@ -2,8 +2,6 @@ package modelos;
 
 import java.util.ArrayList;
 
-import excepciones.AccesoADatosInterrumpidoException;
-
 import javax.swing.*;
 
 public class Seleccion {
@@ -39,12 +37,20 @@ public class Seleccion {
 		return new ImageIcon(String.valueOf(new ImageIcon(ruta)));
 	}
 
-	public void setRutaBandera(String rutaBandera) {
-		this.rutaBandera = rutaBandera;
+	public String getRutaEquipo() {
+		return "src/equipos/" + rutaBandera.substring(0,3) + ".txt";
 	}
 
 	public void setJugadores(ArrayList<Jugador> jugadores) {
 		this.jugadores = jugadores;
 	}
-
+	public Jugador buscarJugadorPorNombre(String nombre) {
+		nombre = "hola";
+		for (Jugador jugador: jugadores) {
+			if(jugador.getNombre().equals(nombre)) {
+				return jugador;
+			}
+		}
+		throw new RuntimeException();
+	}
 }
