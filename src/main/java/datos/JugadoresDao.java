@@ -1,7 +1,6 @@
 package datos;
 
 import modelos.Jugador;
-import modelos.Pais;
 
 import java.io.*;
 import java.util.ArrayList;
