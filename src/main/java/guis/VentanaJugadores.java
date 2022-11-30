@@ -28,6 +28,7 @@ public class VentanaJugadores extends Ventana implements ActionListener {
         crearEtiquetas();
         crearBotones();
         crearComboBox();
+        mostrarDatosEstudiante();
         this.setVisible(true);
     }
 
@@ -77,13 +78,17 @@ public class VentanaJugadores extends Ventana implements ActionListener {
     private void editarJugador(){
         String campoNombre = nombre.getText();
         String campoPosicion = posicion.getText();
-        if(camposVacios() || !poscionFormatoCorrecto(campoPosicion)){
+        if(camposVacios() || !poscionFormatoCorrecto(campoPosicion) || !agregarGK(campoPosicion)){
             return;
         }
         Jugador jugador1 = seleccion.buscarJugadorPorNombre(nombresJugadores.getSelectedItem().toString());
         Jugador jugador2 = new Jugador(jugador1.getNumero(), campoNombre, campoPosicion, jugador1.getRutaBandera());
         seleccion.reemplazarJugador(jugador1, jugador2);
         JugadoresDao.registrarDatos(seleccion.getJugadores(), seleccion.getRutaEquipo());
+    }
+
+    public boolean agregarGK(String campoPosicion){
+        return !seleccion.hayTresGK() || !campoPosicion.equals("GK");
     }
 
     public boolean camposVacios() {
@@ -112,6 +117,7 @@ public class VentanaJugadores extends Ventana implements ActionListener {
         if (e.getSource() == guardarCambios) {
             editarJugador();
             rellenarComboBox();
+            mostrarDatosEstudiante();
         }
     }
 }
